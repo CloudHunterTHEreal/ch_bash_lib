@@ -141,14 +141,12 @@ function read_config() {
 	return 0
 }
 
-
-# TODO Подумать о необходимоcти инициализировать массив config тут
-#   Надо ли инициализировать или стоит возвращать ошибку?
-#   Также важно подумать о нейминге
-
 # Drop previously state of the config data
+# TODO Though about previously array config processing politics
+
+# Drop previously defined / changed array
 unset config
-# Define array for config data
+# Define new config data array
 typeset -A config
 echo "Config init values: ${config[@]}" >> "$log_fullpath"
 
