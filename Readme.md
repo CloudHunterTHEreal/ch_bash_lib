@@ -11,7 +11,7 @@
 >
 >Using in scripts:
 >Config data read:
->`source lib_script_config.sh`
+>`source lib_script_config.sh "$BASH_SOURCE"`
 >
 >Config options using in parent scripts:
 >`echo "Config option <key> set as key=${config[key]}"`
