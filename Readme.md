@@ -1,4 +1,4 @@
-# Naive study and personal usefull bash scripts and tools repo.
+# Naive study and personal useful bash scripts and tools repo.
 
 #### lib_script_config.sh
 >Read config data from `scriptname.conf`
