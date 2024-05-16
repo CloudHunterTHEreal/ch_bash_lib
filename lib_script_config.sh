@@ -5,11 +5,12 @@
 # 1. Solve space containing string values problem
 # 2. Script exit code correct managing
 # 3. Why exit 1 construction close BOTH script and terminal window?
-# 4. Add log and error file storage politic feature.
+# 4. Optimize log and error file storage politic feature.
+# 5. Add more compact version to the repo (useful?)
 #
 ###
 
-function type_help {
+function script_help {
 ###
 #
 # Prep and echo help string
@@ -62,7 +63,7 @@ function script_files_prepare(){
 #
 ###
 
-# TODO Пересмотреть код
+# TODO Add CL options features
 if [ -n "$1" ]; then
 	config_basename="$1"
 #	echo "Config filename = >$config_basename<"
@@ -88,8 +89,9 @@ config_fullpath="$script_base_path""$script_noextention_basename""$config_file_e
 
 script_files_prepare "$config_fullpath" "$error_fullpath" "$log_fullpath"
 
+# TODO Awful code part, fix it!
 case "$1" in
-		-h) type_help
+ -h) script_help
 			return 1
 			;;
 		*) parent_script="$0"
