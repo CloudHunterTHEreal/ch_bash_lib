@@ -4,9 +4,9 @@
 # TODO
 # 1. Solve space containing string values problem
 # 2. Script exit code correct managing
-# 3. Why exit 1 construction close BOTH script and terminal window?
-# 4. Optimize log and error file storage politic feature.
-# 5. Add more compact version to the repo (useful?)
+# 3.Optimize log and error file storage politic feature.
+# 4. Add more compact version to the repo (useful?)
+# 5. Add silent (? default) mode - without work and error logging in files
 #
 ###
 
@@ -16,15 +16,15 @@ function script_help {
 # Prep and echo help string
 #
 ###
-		echo -e "Get script configuration from ./[scriptname].conf\n\nUsage:\n-----"
-		echo 'Inside master script: source ./get_config "$0"'
-		echo "..."
-		echo "Config notes type format:"
-		echo 'config[keyname]=value'
-		echo "..."
-		echo 'Config option note storing format:'
-		echo 'option_name{ }[=]{ }["]option_value["]'
-		echo 'WARNING! Not use spaces inside string values YET!'
+	echo -e "Get script configuration from ./[scriptname].conf\n\nUsage:\n-----"
+	echo 'Inside master script: source ./get_config "$0"'
+	echo "..."
+	echo "Config notes type format:"
+	echo 'config[keyname]=value'
+	echo "..."
+	echo 'Config option note storing format:'
+	echo 'option_name{ }[=]{ }["]option_value["]'
+	echo 'WARNING! Not use spaces inside string values YET!'
 }
 
 function script_files_prepare(){
@@ -156,4 +156,3 @@ read_config "$config_fullpath"
 
 echo "Config values: ${config[@]}" >> "$log_fullpath"
 echo "Gets ${#config[@]} options" >> "$log_fullpath"
-
