@@ -23,7 +23,7 @@ function script_help {
 	echo 'config[keyname]=value'
 	echo "..."
 	echo 'Config option note storing format:'
-	echo 'option_name{ }[=]{ }["]option_value["]'
+ 	echo 'option_name{ }={ }(num_value | "string_value")'
 	echo 'WARNING! Not use spaces inside string values YET!'
 }
 
