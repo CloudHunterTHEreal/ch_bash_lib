@@ -17,7 +17,7 @@ function script_help {
 #
 ###
 	echo -e "Get script configuration from ./[scriptname].conf\n\nUsage:\n-----"
-	echo 'Inside master script: source ./get_config "$0"'
+	echo 'Inside master script: source ./lib_script_config "$BASH_SOURCE"'
 	echo "..."
 	echo "Config notes type format:"
 	echo 'config[keyname]=value'
