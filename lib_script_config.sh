@@ -13,14 +13,16 @@
 function script_help {
 ###
 #
-# Prep and echo help string
+# Prep and echo help 
+#
+# Await argument = script running path ($1)
 #
 ###
 	echo -e "Get script configuration from ./[scriptname].conf\n\nUsage:\n-----"
 	echo "Inside master script:"
  	echo "..."
- 	echo 'source ./lib_script_config "$BASH_SOURCE"'
-  	echo 'get_config "$BASH_SOURCE"'
+ 	echo "source ./lib_script_config $1"
+  	echo "get_config $1"
 	echo "..."
 	echo "Config notes type format:"
 	echo 'config[keyname]=value'
@@ -46,8 +48,9 @@ function script_files_prepare(){
     if [ ! -f "$config_file" ]
         then
             echo "[!] Config file not found! Create new empty $config_file" >> "$err_file"
-            touch "$config_file" 2> "$err_file"
-            if [ "$?" != 0 ]
+            # touch "$config_file" 2> "$err_file"
+            # if [ "$?" != 0 ]
+			if ! touch "$config_file" 2> "$err_file"
             then
                 echo '[!] Can`t to create new config file: '"$config_file"', script halted.'
                 return 1
@@ -68,11 +71,14 @@ function script_files_prepare(){
 
 # TODO Add CL options features
 if [ -n "$1" ]; then
-	config_basename="$1"
+	config_dirname="$1"
 #	echo "Config filename = >$config_basename<"
 else
-	config_basename="$BASH_SOURCE"
-#	echo "Config filename = >$config_basename<"
+	# Use system var BASH_SOURCE
+	config_dirname="$(dirname $BASH_SOURCE)"
+	echo "Config path is \"$config_dirname\""
+	echo "Script filename is \"$(basename $BASH_SOURCE)\""
+	echo "No extention scriptname is ${config_dirname}" 
 fi
 
 # echo "Parsing config for $config_basename"
@@ -83,10 +89,10 @@ error_script_extention=".err"
 script_noextention_basename="${config_basename%.*}"
 
 log_fullpath="$script_base_path""$script_noextention_basename""$log_script_extention"
-echo -e "Script config parsing log info:\nStart date: `date`\n" > "$log_fullpath"
+echo -e "Script config parsing log info:\nStart date: $(date)\n" > "$log_fullpath"
 
 error_fullpath="$script_base_path""$script_noextention_basename""$error_script_extention"
-echo -e "Error log file.\nStart date: `date`\n" > "$error_fullpath"
+echo -e "Error log file.\nStart date: $(date)\n" > "$error_fullpath"
 
 config_fullpath="$script_base_path""$script_noextention_basename""$config_file_extention"
 
@@ -94,7 +100,7 @@ script_files_prepare "$config_fullpath" "$error_fullpath" "$log_fullpath"
 
 # TODO Awful code part, fix it!
 case "$1" in
- -h) script_help
+ -h) script_help config_basename
 			return 1
 			;;
 		*) parent_script="$0"
